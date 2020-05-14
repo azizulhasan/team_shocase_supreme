@@ -1,0 +1,139 @@
+settings
+
+====================================================
+520
+############################# Before
+
+<div id="wpm-6310-noslider-<?php echo $styleId ?>">
+   <?php
+      wpm_6310_category_menu($categoryData, $styleId);
+   
+      $col = 0;
+      if ($members) {
+
+
+############################# Before
+ <div id="wpm-6310-noslider-<?php echo $styleId ?>">
+      <?php
+      wpm_6310_category_menu($categoryData, $styleId);
+      $col = 0;
+      if ($members) {
+
+
+
+======================================================
+535
+########## Before 
+ <div class="wpm-6310-col-<?php echo $allStyle[0] ?>">
+ <div<?php echo $link_type ?>>
+
+ ##########  After 
+ <div class="wpm-6310-col-<?php echo "{$allStyle[0]} wpm-6310-category-filter {$value['category']}" ?>">
+ <div<?php echo $link_type ?>>
+
+
+
+======================================================
+624
+########## remove 
+              <?php
+              if ($col % $allStyle[0] == 0) {
+                echo "</div>";
+              }
+            }
+            if ($col % $allStyle[0] != 0) {
+              echo "</div>";
+            }
+          }
+    ?>
+      </div>
+
+      <div class="carousel">
+
+
+ ##########  After 
+      <?php
+         }
+      }
+      ?>
+      </div>
+      <?php
+      wpm_6310_category_menu($categoryData, $styleId, 'wpm-6310-carousel');
+      ?>
+   <div class="wpm-6310-owl-carousel-container">
+<div class="carousel"> 
+
+
+
+
+    
+======================================================
+624
+########## before 
+           <br />
+    content will go after br
+
+  </div>
+
+
+
+ ##########  After 
+
+
+       <div class="wpm-carousel-item-clone wpm-carousel-item-clone-<?php echo  $styleId ?>">     
+         <?php
+         if ($members) {
+            foreach ($members as $value) {
+            $member_readmore_info = (isset($allSlider[18]) && $allSlider[18])?'wpm_6310_team_member_info_readmore':' wpm_6310_team_member_info';
+            if ($value['profile_details_type'] == 1) {
+               $link_type = " class='wpm_6310_team_style_03  {$member_readmore_info}' link-id='{$value['id']}' link-url='{$value['profile_url']}' target='{$value['open_new_tab']}' team-id='0'";
+            } else if ($value['profile_details_type'] == 2) {
+               $link_type = " class='wpm_6310_team_style_03  {$member_readmore_info}' link-id='0' team-id='{$value['id']}'";
+            } else {
+               $link_type = " class='wpm_6310_team_style_03' link-id='0' team-id='0'";
+            }
+               ?>
+               <div class="wpm-6310-item  wpm-6310-category-filter <?php echo $value['category']; ?>">
+                  <div <?php echo $link_type ?>>
+                     <img src="<?php echo $value['image'] ?>" alt="<?php echo wpm_6310_replace($value['name']) ?>">
+                     <figcaption>
+                        <div class="wpm_6310_team_style_03_caption">
+                           <div class="wpm_6310_team_style_03_designation"><?php echo wpm_6310_replace($value['designation']) ?></div>
+                           <div class="wpm_6310_team_style_03_title"><?php echo wpm_6310_replace($value['name']) ?></div>
+                           <?php
+                           $icons = $wpdb->get_results("SELECT * FROM $icon_table WHERE id in ({$value['iconids']})", ARRAY_A);
+                           if ($icons) {
+                              $iconUrl = explode("||||", $value['iconurl']);
+                              $iconIds = explode(",", $value['iconids']);
+                              $iconStyles = "";
+                              $c = 0;
+                              foreach ($icons as $li) {
+                                 $index = array_search($li['id'], $iconIds);
+                                 if ($c == 0) {
+                                    echo "<ul class='wpm_6310_team_style_03_social'>";
+                                 }
+                                 $c++;
+                                 echo "<li><a " . wpm_6310_external_link($iconUrl[$index]) . "  title='{$li['name']}'  id='wpm-social-link-{$value['id']}-{$li['id']}'><i class='" . $li['class_name'] . "'></i></a></li>";
+                                 $iconStyles .= "<style>#wpm-social-link-{$value['id']}-{$li['id']}{border: {$allStyle[28]}px solid {$li['bgcolor']}; background-color: {$li['bgcolor']}; color:{$li['color']};} #wpm-social-link-{$value['id']}-{$li['id']}:hover{color: {$li['bgcolor']}; background-color:{$li['color']};} </style>";
+                                 if ($c == 4) {
+                                    break;
+                                 }
+                              }
+
+                              if ($c > 0) {
+                                 echo "</ul>";
+                                 echo $iconStyles;
+                              }
+                           }
+                           wpm_6310_readmore_activation($template_id, $value['profile_details_type'], $allSlider[19]);
+                           ?>
+
+                        </div>
+                     </figcaption>
+                  </div>
+               </div>
+                  <?php
+                     }
+                  }
+                  ?>  
+         </div>
